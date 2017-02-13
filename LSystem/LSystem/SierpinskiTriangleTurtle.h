@@ -1,45 +1,39 @@
 #include "Turtle.h"
-#include "SFML\Window.hpp"
 
-namespace LSystem
+class SierpinskiTriangleTurtle : public Turtle<char, std::string>
 {
-	namespace Examples
+public:
+	SierpinskiTriangleTurtle(double start_angle_, double start_x_, double start_y_)
+		: Turtle(start_angle_, start_x_, start_y_)
 	{
-		class SierpinskiTriangleTurtle : public Turtle<char, std::string>
-		{
-		public:
-			void init(int iterations_);
-			void draw(const sf::Window& window_);
-		};
+		_system->set_start("F-G-G");
+		_system->add_rule('F', "F-G+F+G-F");
+		_system->add_rule('G', "GG");
+	}
 
-		void SierpinskiTriangleTurtle::init(int iterations_)
-		{
-			_system.set_state("F-G-G");
-			_system.add_rule('F', "F-G+F+G-F");
-			_system.add_rule('G', "GG");
-			_system.iterate(2);
-		}
+	const std::vector<Vertex> &generate(int iterations_) const override
+	{
+		auto &result = _system->iterate(iterations_);
 
-		void SierpinskiTriangleTurtle::draw(const sf::Window& window_)
+		for (auto &next : result)
 		{
-			for (auto next : _system.get_state())
+			switch (next)
 			{
-				switch (next)
-				{
-				case 'F':
-					_renderer.draw_forward(window_, 1.0);
-					break;
-				case 'G':
-					_renderer.draw_forward(window_, 1.0);
-					break;
-				case '+':
-					_renderer.rotate(-120.0f);// turn left
-					break;
-				case '-':
-					_renderer.rotate(120.0f);// turn right
-					break;
-				}
+			case 'F':
+				_renderer->move_forward(5.0);
+				break;
+			case 'G':
+				_renderer->move_forward(5.0);
+				break;
+			case '+':
+				_renderer->rotate(-120.0f);
+				break;
+			case '-':
+				_renderer->rotate(120.0f);
+				break;
 			}
 		}
-	}
-}
+
+		return _renderer->get_vertices();
+	};
+};

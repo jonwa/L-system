@@ -2,73 +2,72 @@
 
 #include <map>
 
-namespace LSystem
+template<class Element, class Sequence>
+class LSystem
 {
-	template<class Element, class Sequence>
-	class LSystem
+private:
+	Sequence _start;
+	std::map<Element, Sequence> _rules;
+public:
+	LSystem() { }
+	~LSystem() { }
+	
+	void set_start(Sequence state_);
+	void add_rule(Element element_, Sequence sequence_);
+	const Sequence iterate(int iterations_) const;
+	const Sequence *replace(const Element& element_) const;
+};
+
+template<class Element, class Sequence>
+void LSystem<Element, Sequence>::set_start(Sequence start_)
+{
+	_start = start_;
+}
+
+template<class Element, class Sequence>
+void LSystem<Element, Sequence>::add_rule(Element element_, Sequence sequence_)
+{
+	_rules.insert(std::make_pair(element_, sequence_));
+}
+
+template<class Element, class Sequence>
+const Sequence LSystem<Element, Sequence>::iterate(int iterations_) const
+{
+	Sequence result = _start;
+
+	Sequence next;
+	for (int i = 0; i < iterations_; ++i)
 	{
-		Sequence _state;
-		std::map<Element, Sequence> _rules;
-	public:
-		LSystem();
-		~LSystem();
-
-		void iterate(int i_);
-		void add_rule(Element elem_, Sequence seq_);
-		void set_state(Sequence state_) { _state = state_; }
-
-		const Sequence& get_state() { return _state; }
-		const Sequence replace(const Element& elem_);
-	};
-
-	template<class Element, class Sequence>
-	LSystem<Element, Sequence>::LSystem()
-	{
-	}
-
-	template<class Element, class Sequence>
-	LSystem<Element, Sequence>::~LSystem()
-	{
-	}
-
-	template<class Element, class Sequence>
-	void LSystem<Element, Sequence>::iterate(int i_)
-	{
-		Sequence next;
-
-		int i = 0;
-		while (i < i_)
+		next.clear();
+		for (size_t j = 0; j < result.size(); ++j)
 		{
-			for (int j = 0; j < _state.size(); ++j)
+			auto replaced = replace(result.at(j));
+			if (replaced == nullptr)
 			{
-				auto result = replace(_state[j]);
-				for (int k = 0; k < result.size(); ++k)
+				next.push_back(result.at(j));
+			}
+			else
+			{
+				for (size_t k = 0; k < replaced->size(); ++k)
 				{
-					next.push_back(result[k]);
+					next.push_back(replaced->at(k));
 				}
 			}
-			_state = next;
-			i++;
 		}
+		result = next;
 	}
 
-	template<class Element, class Sequence>
-	void LSystem<Element, Sequence>::add_rule(Element elem_, Sequence seq_)
+	return result;
+}
+
+template<class Element, class Sequence>
+const Sequence *LSystem<Element, Sequence>::replace(const Element& element_) const
+{
+	auto it = _rules.find(element_);
+	if (it != _rules.end())
 	{
-		_rules.insert(std::make_pair(elem_, seq_));
+		return &it->second;
 	}
 
-	template<class Element, class Sequence>
-	const Sequence LSystem<Element, Sequence>::replace(const Element& elem_)
-	{
-		auto it = _rules.find(elem_);
-		if (it != _rules.end())
-		{
-			return it->second;
-		}
-
-		Sequence ret;
-		ret.push_back(elem_);
-		return ret;
-	}
+	return nullptr;
 }

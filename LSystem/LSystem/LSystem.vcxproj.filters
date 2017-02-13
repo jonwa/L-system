@@ -13,15 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Examples">
-      <UniqueIdentifier>{f199f1c1-ebda-4870-b6da-2fef6cc7b3ab}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,20 +23,17 @@
     <ClInclude Include="LSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Turtle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FractalPlantTurtle.h">
-      <Filter>Header Files\Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="PythagorasTreeTurtle.h">
-      <Filter>Header Files\Examples</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SierpinskiTriangleTurtle.h">
-      <Filter>Header Files\Examples</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Turtle.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

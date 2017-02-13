@@ -3,19 +3,24 @@
 #include "LSystem.h"
 #include "Renderer.h"
 
-namespace LSystem
+template<class Element, class Sequence>
+class Turtle
 {
-	template<class Element, class Sequence>
-	class Turtle
-	{
-	protected:
-		LSystem<Element, Sequence> _system;
-		Renderer _renderer;
-	public:
-		Turtle() { }
-		~Turtle() { }
+protected:
+	Renderer *_renderer;
+	LSystem<Element, Sequence> *_system;
+public:
+	Turtle(double start_angle_, double start_x_, double start_y_)
+	{ 
+		_renderer = new Renderer(start_angle_, start_x_, start_y_);
+		_system = new LSystem<char, std::string>();
+	}
 
-		void init(int iterations_);
-		void draw(const sf::Window& window_);
-	};
-}
+	virtual ~Turtle()
+	{
+		delete _renderer;
+		delete _system;
+	}
+
+	const virtual std::vector<Vertex> &generate(int iterations_) const = 0;
+};

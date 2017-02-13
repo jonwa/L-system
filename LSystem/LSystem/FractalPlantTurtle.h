@@ -1,48 +1,43 @@
 #include "Turtle.h"
-#include "SFML\Window.hpp"
 
-namespace LSystem
+class FractalPlantTurtle : public Turtle<char, std::string>
 {
-	namespace Examples
+
+public:
+	FractalPlantTurtle(double start_angle_, double start_x_, double start_y_)
+		: Turtle(start_angle_, start_x_, start_y_)
+	{ 
+		_system->set_start("X");
+		_system->add_rule('X', "F-[[X]+X]+F[+FX]-X");
+		_system->add_rule('F', "FF");
+	}
+
+	const std::vector<Vertex> &generate(int iterations_) const override
 	{
-		class FractalPlantTurtle : public Turtle<char, std::string>
-		{
-		public:
-			void init(int iterations_);
-			void draw(const sf::Window& window_);
-		};
+		auto &result = _system->iterate(iterations_);
 
-		void FractalPlantTurtle::init(int iterations_)
+		for (auto &next : result)
 		{
-			_system.set_state("X");
-			_system.add_rule('X', "F-[[X]+X]+F[+FX]-X");
-			_system.add_rule('F', "FF");
-			_system.iterate(iterations_);
-		}
-
-		void FractalPlantTurtle::draw(const sf::Window& window_)
-		{
-			for (auto next : _system.get_state())
+			switch (next)
 			{
-				switch (next)
-				{
-				case 'F':
-					_renderer.draw_forward(window_, 1.0);
-					break;
-				case '-':
-					_renderer.rotate(-25.0);//turn left
-					break;
-				case '+':
-					_renderer.rotate(25.0);//turn right
-					break;
-				case '[':
-					_renderer.push();
-					break;
-				case ']':
-					_renderer.pop();
-					break;
-				}
+			case 'F':
+				_renderer->move_forward(2.0);
+				break;
+			case '-':
+				_renderer->rotate(-25.0);
+				break;
+			case '+':
+				_renderer->rotate(25.0);
+				break;
+			case '[':
+				_renderer->push();
+				break;
+			case ']':
+				_renderer->pop();
+				break;
 			}
 		}
+
+		return _renderer->get_vertices();
 	}
-}
+};
