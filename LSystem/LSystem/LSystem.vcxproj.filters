@@ -44,8 +44,5 @@
     <ClInclude Include="SierpinskiTriangleTurtle.h">
       <Filter>Header Files\Examples</Filter>
     </ClInclude>
-    <ClInclude Include="Examples.h">
-      <Filter>Header Files\Examples</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

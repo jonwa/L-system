@@ -88,7 +88,6 @@
     <ClCompile Include="Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Examples.h" />
     <ClInclude Include="FractalPlantTurtle.h" />
     <ClInclude Include="LSystem.h" />
     <ClInclude Include="PythagorasTreeTurtle.h" />
