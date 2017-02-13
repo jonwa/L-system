@@ -1,7 +1,9 @@
 #include <iostream>
 #include <SFML\Graphics.hpp>
 
-#include "Examples.h"
+#include "FractalPlantTurtle.h"
+#include "PythagorasTreeTurtle.h"
+#include "SierpinskiTriangleTurtle.h"
 
 int main()
 {

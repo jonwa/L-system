@@ -9,7 +9,7 @@ namespace LSystem
 		{
 		public:
 			void init(int iterations_);
-			void draw(const sf::Window& window);
+			void draw(const sf::Window& window_);
 		};
 
 		void FractalPlantTurtle::init(int iterations_)
@@ -20,14 +20,14 @@ namespace LSystem
 			_system.iterate(iterations_);
 		}
 
-		void FractalPlantTurtle::draw(const sf::Window& window)
+		void FractalPlantTurtle::draw(const sf::Window& window_)
 		{
 			for (auto next : _system.get_state())
 			{
 				switch (next)
 				{
 				case 'F':
-					_renderer.move_forward(1.0);
+					_renderer.draw_forward(window_, 1.0);
 					break;
 				case '-':
 					_renderer.rotate(-25.0);//turn left

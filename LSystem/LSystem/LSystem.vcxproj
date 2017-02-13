@@ -88,8 +88,12 @@
     <ClCompile Include="Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Examples.h" />
+    <ClInclude Include="FractalPlantTurtle.h" />
     <ClInclude Include="LSystem.h" />
+    <ClInclude Include="PythagorasTreeTurtle.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="SierpinskiTriangleTurtle.h" />
     <ClInclude Include="Turtle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -3,30 +3,26 @@
 #include <SFML\Graphics\Vertex.hpp>
 #include <SFML\Graphics\Color.hpp>
 
-Renderer::Renderer()
+namespace LSystem
 {
-}
+	void Renderer::pop()
+	{
+		_states.pop();
+	}
 
-Renderer::~Renderer()
-{
-}
+	void Renderer::push()
+	{
 
-void Renderer::pop()
-{
-	_states.pop();
-}
+	}
 
-void Renderer::push()
-{
-	
-}
+	void Renderer::rotate(double angle_)
+	{
 
-void Renderer::rotate(double angle_)
-{
+	}
 
-}
+	void Renderer::draw_forward(const sf::Window& window_, double distance_)
+	{
 
-void Renderer::move_forward(double distance_)
-{
+	}
 
 }

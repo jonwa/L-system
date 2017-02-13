@@ -9,7 +9,7 @@ namespace LSystem
 		{
 		public:
 			void init(int iterations_);
-			void draw(const sf::Window& window);
+			void draw(const sf::Window& window_);
 		};
 
 		void PythagorasTreeTurtle::init(int iterations_)
@@ -20,17 +20,17 @@ namespace LSystem
 			_system.iterate(iterations_);
 		}
 
-		void PythagorasTreeTurtle::draw(const sf::Window& window)
+		void PythagorasTreeTurtle::draw(const sf::Window& window_)
 		{
 			for (auto next : _system.get_state())
 			{
 				switch (next)
 				{
 				case '0':
-					_renderer.move_forward(1.0);
+					_renderer.draw_forward(window_, 1.0);
 					break;
 				case '1':
-					_renderer.move_forward(1.0);
+					_renderer.draw_forward(window_, 1.0);
 					break;
 				case '[':
 					_renderer.push();
