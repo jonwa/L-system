@@ -1,2 +1,3 @@
-# LSystem
-Lindenmayer System implementation in C++ using SFML.
+# L-System
+
+Lindenmayer System implementation.
